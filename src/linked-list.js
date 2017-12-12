@@ -10,18 +10,48 @@ class LinkedList {
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   addToTail(value) {
     const newNode = {
-      next: null,
       value,
+      next: null,
     };
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+      return;
+    }
+    if (this.head !== null) {
+      const currentNode = this.head;
+      currentNode.next = newNode;
+      this.tail = newNode;
+      return;
+    }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
-
+    const removed = this.head;
+    this.head = removed.next;
+    return removed.value;
   }
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
+    // if (this.head === null) return false;
+
+    // const search = (node) => {
+    //   if (node.value === value) return true;
+    //   if (node.next === null) return false;
+    //   // console.log(node.value, value);
+    //   node = node.next;
+    //   return search(node);
+    // };
+    // return search(this.head);
+    if (this.head === null) return false;
+    const searchLinkedList = (node) => {
+      if (node.value === value) return true;
+      if (node.next === null) return false;
+      return searchLinkedList(node.next);
+    };
+    return searchLinkedList(this.head);
 
   }
 }

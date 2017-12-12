@@ -33,15 +33,18 @@ class HashTable {
     // const pairExists = this.storage.set(keyIndex, undefined);
     // console.log(pairExists);
     // if (pairExists === undefined) return pairExists;
+    const removalBucket = getIndexBelowMax(key, this.limit);
+    console.log(this.storage.get(removalBucket));
+    return this.storage.set(removalBucket, undefined);
   }
 
   retrieve(key) {
     // const findIndex = getIndexBelowMax(key, this.limit);
     // return this.storage.get(findIndex)[1];
     const valueBucket = getIndexBelowMax(key, this.limit);
-    console.log(this.storage.get(valueBucket));
+    // console.log(this.storage.get(valueBucket));
     if (this.storage.get(valueBucket) === undefined) return undefined;
-    console.log(this.storage.get(valueBucket)[1]);
+    // console.log(this.storage.get(valueBucket)[1]);
     return this.storage.get(valueBucket)[1];
   }
 }

@@ -10,40 +10,18 @@ class HashTable {
   }
 
   insert(key, value) {
-    // console.log(key);
-    const insertAt = getIndexBelowMax(key, this.limit);
-    // console.log(insertAt);
-    // this.storage.set(insertAt, [key, value]);
-    // console.log(this.storage.get(insertAt));
-    const alreadyExists = this.storage.get(insertAt) === undefined;
-    // console.log(alreadyExists);
-    if (alreadyExists) {
-      // this.storage.set(insertAt, [key, value]);
-      this.storage.set(insertAt, [key, value]);
-    }
-    // if (this.storage[insertAt] === undefined) {
-    if (!alreadyExists) {
-      // this.storage[insertAt] = [[key, value]];
-      this.storage.set(insertAt, [key, value]);
-    }
-    // console.log(this.storage.get(insertAt));
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
   }
 
   remove(key) {
-    // const keyIndex = getIndexBelowMax(key, this.limit);
-    // const pairExists = this.storage.set(keyIndex, undefined);
-    // console.log(pairExists);
-    // if (pairExists === undefined) return pairExists;
-    const removalBucket = getIndexBelowMax(key, this.limit);
-    // console.log(this.storage.get(removalBucket));
+    const removalBucket = getIndexBelowMax(key.toString(), this.limit);
     return this.storage.set(removalBucket, undefined);
   }
 
   retrieve(key) {
-    const valueBucket = getIndexBelowMax(key, this.limit);
-    // console.log(this.storage.get(valueBucket));
+    const valueBucket = getIndexBelowMax(key.toString(), this.limit);
     if (this.storage.get(valueBucket) === undefined) return undefined;
-    console.log(typeof key, key);
     return this.storage.get(valueBucket)[1];
   }
 }

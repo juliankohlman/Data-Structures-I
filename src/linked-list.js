@@ -13,38 +13,16 @@ class LinkedList {
       next: null,
       value,
     };
-    if (this.head === null) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
-    }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
-    if (this.head === null) return;
-    if (this.head.next === null) {
-      const head = this.head;
-      this.head = null;
-      this.tail = null;
-      return head.value;
-    }
-    const head = this.head;
-    this.head = this.head.next;
-    return head.value;
+
   }
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
-    if (this.head === null) return false;
-    const searchLinkedList = (node) => {
-      if (node.value === value) return true;
-      if (node.next === null) return false;
-      return searchLinkedList(node.next);
-    };
-    return searchLinkedList(this.head);
+
   }
 }
 

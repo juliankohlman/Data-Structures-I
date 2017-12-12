@@ -1,9 +1,6 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-lets */
 /* eslint-disable class-methods-use-this */
 const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
-
-// LimitedArray, and getIndexBelowMax are two tools provided for you in the helper file.
-// There are other methods on the LimitedArray class in the './hash-table-helpers' file that you can use for your implementation.
 
 class HashTable {
   constructor(limit = 8) {
@@ -11,24 +8,41 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
-  // Adds the given key, value pair to the hash table
-  // Fetch the bucket associated with the given key using the getIndexBelowMax function
-  // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
-  // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
+
   insert(key, value) {
-
+    const insertAt = getIndexBelowMax(key, this.limit);
+    // console.log(insertAt);
+    // this.storage.set(insertAt, [key, value]);
+    // console.log(this.storage.get(insertAt));
+    const alreadyExists = this.storage.get(insertAt) === undefined;
+    console.log(alreadyExists);
+    if (alreadyExists) {
+      // this.storage.set(insertAt, [key, value]);
+      this.storage.set(insertAt, [key, value]);
+    }
+    // if (this.storage[insertAt] === undefined) {
+    if (!alreadyExists) {
+      // this.storage[insertAt] = [[key, value]];
+      this.storage.set(insertAt, [key, value]);
+    }
+    // console.log(this.storage.get(insertAt));
   }
-  // Removes the key, value pair from the hash table
-  // Fetch the bucket associated with the given key using the getIndexBelowMax function
-  // Remove the key, value pair from the bucket
+
   remove(key) {
-
+    // const keyIndex = getIndexBelowMax(key, this.limit);
+    // const pairExists = this.storage.set(keyIndex, undefined);
+    // console.log(pairExists);
+    // if (pairExists === undefined) return pairExists;
   }
-  // Fetches the value associated with the given key from the hash table
-  // Fetch the bucket associated with the given key using the getIndexBelowMax function
-  // Find the key, value pair inside the bucket and return the value
-  retrieve(key) {
 
+  retrieve(key) {
+    // const findIndex = getIndexBelowMax(key, this.limit);
+    // return this.storage.get(findIndex)[1];
+    const valueBucket = getIndexBelowMax(key, this.limit);
+    console.log(this.storage.get(valueBucket));
+    if (this.storage.get(valueBucket) === undefined) return undefined;
+    console.log(this.storage.get(valueBucket)[1]);
+    return this.storage.get(valueBucket)[1];
   }
 }
 

@@ -35,10 +35,10 @@ class LimitedArray {
   }
 }
 /* eslint-disable no-bitwise, operator-assignment */
-// This is hash function you'll be using to hash keys
-// There's some bit-shifting magic going on here, but essentially, all it is doing is performing the modulo operator
-// on the given `str` arg (the key) modded by the limit of the limited array
-// This simply ensures that the hash function always returns an index that is within the boundaries of the limited array
+// This is hash function you'll be using to hash keys There's some bit-shifting magic going on here,
+// but essentially, all it is doing is performing the modulo operator on the given `str` arg (the
+// key) modded by the limit of the limited array This simply ensures that the hash function always
+// returns an index that is within the boundaries of the limited array
 const getIndexBelowMax = (str, max) => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {

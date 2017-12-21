@@ -9,7 +9,35 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
 
+  checkCapacity() {
+    let fullBuckets = 0;
+    this.storage.each((bucket) => {
+      if (bucket !== undefined) fullBuckets++;
+    });
+    return (fullBuckets / this.limit) >= 0.75;
+  }
+
+  resize() {
+    // increase limit of limited array by factor of 2
+    this.limit *= 2;
+    // keep ref to old limited array
+    const originalArray = this.storage;
+    // create new limited array with double the size
+    this.storage = new LimitedArray(this.limit);
+    // put all the buckets from old array into new array
+    originalArray.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((pair) => {
+        this.insert(pair[0], pair[1]);
+      });
+    });
+  }
+
   insert(key, value) {
+    // check capacity
+    // if its true
+    // call resize
+    if (this.checkCapacity()) this.resize();
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
 
